@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_frame_recipe_steps"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/recipe_step_desc_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/material_card_edge_margin"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="@dimen/material_card_elevation_resting"
+        app:cardBackgroundColor="@color/background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_step_video"
+        tools:targetApi="lollipop">
+
+
+        <LinearLayout
+            android:id="@+id/reszletes_lepes_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/android_eats_apple_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/background"
+                android:src="@drawable/android_eating_apple" />
+
+            <TextView
+                android:id="@+id/recipe_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/material_card_title_block_large_padding_bottom"
+                android:paddingEnd="@dimen/material_card_title_block_padding_horizontal"
+                android:paddingStart="@dimen/material_card_title_block_padding_horizontal"
+                android:paddingTop="@dimen/material_card_title_block_large_padding_top"
+                android:textSize="@dimen/material_card_supporting_text_text_size"
+                tools:text="Step description" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/recipe_step_video"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/exo_high"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:hapticFeedbackEnabled="true"
+        app:menu="@menu/navi"/>
+
+</android.support.constraint.ConstraintLayout>

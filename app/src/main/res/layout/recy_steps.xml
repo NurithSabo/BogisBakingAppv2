@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/step_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:ignore="UseCompoundDrawables">
+
+    <TextView
+        android:id="@+id/step_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
+        android:paddingRight="40dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:textSize="@dimen/material_list_normal_primary_text_size"
+        tools:text="Recipe Introduction" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="@dimen/material_list_icon_size"
+        android:layout_height="@dimen/material_list_icon_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
+        android:tint="@color/colorPrimary"
+        app:srcCompat="@drawable/arrow_right"
+        tools:ignore="ContentDescription" />
+    <View android:background="@color/colorPrimary"
+        android:layout_width = "match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>
