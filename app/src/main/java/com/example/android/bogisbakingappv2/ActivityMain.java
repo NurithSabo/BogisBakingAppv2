@@ -50,6 +50,8 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
     public static ArrayList<DataIngredient> ingredList;
     public static ArrayList<DataStep> stepList;
 
+
+
     private void loadImageData(){
         mRecipeList = new ArrayList<>();
         mRequestQueue = Volley.newRequestQueue(this);
@@ -57,7 +59,7 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
 
     }
 
-    private void parseJsonForImage(){
+    public void parseJsonForImage(){
         String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -155,14 +157,11 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (null != activeNetwork) {
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
-                answer="You are connected to a WiFi Network";
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
-                answer="You are connected to a Mobile Network";
+            answer = "You are connected to internet";
         }
         else{
 
-            answer = "No internet Connectivity";}
+            answer = "No internet Connection";}
 
         Toast.makeText(ActivityMain.this, answer,
                 Toast.LENGTH_LONG).show();

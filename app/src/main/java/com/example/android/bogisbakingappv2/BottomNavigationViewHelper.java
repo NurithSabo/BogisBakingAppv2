@@ -11,8 +11,10 @@ import java.lang.reflect.Field;
 
 public class BottomNavigationViewHelper {
     @SuppressLint("RestrictedApi")
+
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+
         try {
             Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
             shiftingMode.setAccessible(true);
@@ -25,6 +27,7 @@ public class BottomNavigationViewHelper {
                 // set once again checked value, so view will be updated
                 //noinspection RestrictedApi
                 item.setChecked(item.getItemData().isChecked());
+
             }
         } catch (NoSuchFieldException e) {
             Log.e("BNVHelper", "Unable to get shift mode field", e);
