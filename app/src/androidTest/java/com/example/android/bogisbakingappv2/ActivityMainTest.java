@@ -32,10 +32,9 @@ public class ActivityMainTest {
 @Rule public ActivityTestRule<ActivityMain> mActivityTestRule =
         new ActivityTestRule<>(ActivityMain.class);
 @Test
-    public void clickRecipe()
-    {
-        onView(withId(R.id.recipesList)).perform(click());
-        onView(withId(R.id.recipesList)).check(matches(isCompletelyDisplayed()));
-    }
+    public void clickRecipe() {
+    onView(withId(R.id.recipesList)).perform(click());
+    onView(withId(R.id.recipesList)).check(matches(isCompletelyDisplayed()));
+}
 
 }
