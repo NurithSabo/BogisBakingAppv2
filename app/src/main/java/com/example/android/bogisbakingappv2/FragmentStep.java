@@ -242,7 +242,11 @@ String TAG = "ááááááá";
         lepes = (TextView) view.findViewById(R.id.recipe_step);
         lay = (LinearLayout) view.findViewById(R.id.reszletes_lepes_layout);
         mNavi= (BottomNavigationView) view.findViewById(R.id.navigation);
-        step = FragmentDetail.lepesek.get(tempSelection);//step =  FragmentDetail.lepeske;
+        try {
+            step = FragmentDetail.lepesek.get(tempSelection);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         exoPlayerView = (SimpleExoPlayerView) view.findViewById(R.id.recipe_step_video);
         descriptionCard = (CardView) view.findViewById(R.id.recipe_step_desc_card);
         mNavi.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -272,9 +276,13 @@ Log.e("OnCreate", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa "+videoString);
             }
 
         }
-        if(ActivityMain.tabletSize) {
-            lepes.setText(step.getDescription());
+        try {
+            if(ActivityMain.tabletSize) {
+                lepes.setText(step.getDescription());
 
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return view;
     }//onCreate vége

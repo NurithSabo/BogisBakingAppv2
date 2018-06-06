@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:elevation="8dp"
-        app:cardBackgroundColor="#D9CACF"
+        app:cardBackgroundColor="#c8ffb5f3"
         tools:targetApi="lollipop">
 
         <TextView
@@ -37,7 +37,8 @@
         android:id="@+id/recipe_details_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/material_card_edge_margin"/>
+        android:layout_margin="@dimen/material_card_edge_margin"
+        android:background="@color/background" />
 
 </LinearLayout>
     </ScrollView>

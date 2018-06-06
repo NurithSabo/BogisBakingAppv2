@@ -29,12 +29,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 @RunWith(AndroidJUnit4.class)
 
 public class ActivityMainTest {
-@Rule public ActivityTestRule<ActivityMain> mActivityTestRule =
+
+/*@Rule public ActivityTestRule<ActivityMain> mActivityTestRule =
         new ActivityTestRule<>(ActivityMain.class);
 @Test
     public void clickRecipe() {
     onView(withId(R.id.recipesList)).perform(click());
     onView(withId(R.id.recipesList)).check(matches(isCompletelyDisplayed()));
-}
+}*/
+
 
 }

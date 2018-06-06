@@ -45,7 +45,7 @@ public class ActivityDetail extends ActivityMain {
     }
 
 
-boolean tab = ActivityMain.tabletSize;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +53,12 @@ boolean tab = ActivityMain.tabletSize;
         boolean isTablet = ActivityMain.tabletSize;//getResources().getBoolean(R.bool.isTablet);
         lay = (LinearLayout) findViewById(R.id.reszletes_lepes_layout);
 
-        if (getSupportActionBar() != null) {
+        if (getSupportActionBar() != null && getIntent().getExtras() != null) {
             name = getIntent().getExtras().getString(ActivityMain.NAME);
             setTitle(name);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        else{System.out.println("böeeeeeeeeee");}
 
        //https://stackoverflow.com/questions/31277979/why-is-it-necessary-to-check-savedinstancestate-inside-of-oncreate
          if(savedInstanceState == null)

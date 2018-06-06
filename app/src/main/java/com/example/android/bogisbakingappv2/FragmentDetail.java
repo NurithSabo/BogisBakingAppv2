@@ -43,12 +43,18 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
     public void ingredients(ArrayList<DataIngredient> lista, TextView textView)
     {
         textView.setText(null);
-        for (int i = 0; i < lista.size(); i++)
-        {
-            textView.append(lista.get(i).getIngredientName()+ ": "+
-                            lista.get(i).getQuantity()+" "+
-                            lista.get(i).getMeasure().toLowerCase()+"\n");
+        try {
+            for (int i = 0; i < lista.size(); i++) {
+                textView.append(lista.get(i).getIngredientName() + ": " +
+                        lista.get(i).getQuantity() + " " +
+                        lista.get(i).getMeasure().toLowerCase() + "\n");
 
+            }
+        }
+        catch (NullPointerException nPE)
+        {
+            Log.e("kaki","van a palacsintában");
+            nPE.printStackTrace();
         }
     }
 
@@ -60,7 +66,7 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
         ingList = (TextView) view.findViewById(R.id.recipe_ingredients);
 
             ingredients(hozzavalok,ingList);
-            Log.e("hozzavalok:", ""+hozzavalok.get(0).getIngredientName());
+           // Log.e("hozzavalok:", ""+hozzavalok.get(0).getIngredientName());
 
 
         lepesek = ActivityMain.stepList;
@@ -75,8 +81,16 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
         manager = new LinearLayoutManager(mContext);
         mRecyclerview.setLayoutManager(manager);
 
-        if(lepesek.get(FragmentStep.tempSelection).getVideoUrl()!=null || lepesek.get(FragmentStep.tempSelection).getVideoUrl()!=""){
-        fs.setVideoString(lepesek.get(FragmentStep.tempSelection).getVideoUrl());}
+
+        try {
+            if(lepesek.get(FragmentStep.tempSelection).getVideoUrl()!=null
+                    || lepesek.get(FragmentStep.tempSelection).getVideoUrl()!="")
+            {
+            fs.setVideoString(lepesek.get(FragmentStep.tempSelection).getVideoUrl());
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
@@ -86,7 +100,12 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(mContext, ActivityStep.class);
-        DataStep clickedLepes = lepesek.get(position);
+        DataStep clickedLepes = null;
+        try {
+            clickedLepes = lepesek.get(position);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         intent.putExtra(STEP, clickedLepes);
         //Log.e("lepes", clickedLepes.getDescription());
         lepeske = clickedLepes;

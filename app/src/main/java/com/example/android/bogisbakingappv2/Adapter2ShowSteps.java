@@ -30,16 +30,24 @@ public class Adapter2ShowSteps extends RecyclerView.Adapter<Adapter2ShowSteps.Re
 
     @Override
     public void onBindViewHolder(RecipeSteps holder, int position) {
-        DataStep currentStep = mSteps.get(position);
-        String shortStep = currentStep.getShortDescription();
+        DataStep currentStep = null;
+        try {
+            currentStep = mSteps.get(position);
+            String shortStep = currentStep.getShortDescription();
 
-        holder.mTextView.setText(shortStep);
-        holder.mImageView.setImageResource(R.drawable.arrow_right);
+            holder.mTextView.setText(shortStep);
+            holder.mImageView.setImageResource(R.drawable.arrow_right);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return  mSteps.size();
+        if(mSteps != null){
+        return  mSteps.size();}
+        else{return 1;}
     }
 
     public interface OnItemClickListener
