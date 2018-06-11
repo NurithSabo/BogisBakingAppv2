@@ -69,6 +69,12 @@ String TAG = "ááááááá";
     ImageView andr;
     BottomNavigationView mNavi;
     public static int tempSelection;
+    public static int telSel;
+
+    public void setTelSel(int telSel) {
+        this.telSel = telSel;
+    }
+
     String video;
     int orientation;
 
@@ -88,7 +94,7 @@ String TAG = "ááááááá";
         if(step != null)
         {
             if(!ActivityMain.tabletSize){
-            video = step.getVideoUrl();}
+                video = step.getVideoUrl();}
             else{video = videoString;}
         }
         else
@@ -96,6 +102,7 @@ String TAG = "ááááááá";
             video = "";
 
         }
+
  orientation = getResources().getConfiguration().orientation;
         if (video != null && !video.isEmpty()) {
             // Init and show video view
@@ -148,13 +155,13 @@ String TAG = "ááááááá";
 
                         case R.id.navigation_left:
                             BottomNavigationViewHelper.disableShiftMode(mNavi);
-                            if(tempSelection > 0)
+                            if(tempSelection > 0 || telSel > 0)
                             {
                                 if(!ActivityMain.tabletSize)
                                 {
-                                    tempSelection = tempSelection-1;
-                                    step = FragmentDetail.lepesek.get(tempSelection);
-                                    lepes.setText(FragmentDetail.lepesek.get(tempSelection).getDescription());
+                                    telSel = telSel-1;
+                                    step = FragmentDetail.lepesek.get(telSel);
+                                    lepes.setText(FragmentDetail.lepesek.get(telSel).getDescription());
                                     releasePlayer();
                                     videoLoad();
                                 }
@@ -183,10 +190,10 @@ String TAG = "ááááááá";
                             return true;
                         case R.id.navigation_right:
                             BottomNavigationViewHelper.disableShiftMode(mNavi);
-                            if(tempSelection < FragmentDetail.lepesek.size()-1) {
+                            if(tempSelection < FragmentDetail.lepesek.size()-1 && telSel < FragmentDetail.lepesek.size()) {
                                 if (!ActivityMain.tabletSize) {
-                                    tempSelection = tempSelection + 1;
-                                    step = FragmentDetail.lepesek.get(tempSelection);
+                                    telSel = telSel + 1;
+                                    step = FragmentDetail.lepesek.get(telSel);
                                     lepes.setText(step.getDescription());
                                     releasePlayer();
                                     videoLoad();
@@ -238,12 +245,14 @@ String TAG = "ááááááá";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_single_step,container, false);
         lepes = (TextView) view.findViewById(R.id.recipe_step);
         lay = (LinearLayout) view.findViewById(R.id.reszletes_lepes_layout);
         mNavi= (BottomNavigationView) view.findViewById(R.id.navigation);
         try {
-            step = FragmentDetail.lepesek.get(tempSelection);
+            if(ActivityMain.tabletSize){step = FragmentDetail.lepesek.get(tempSelection);}
+            else{step = FragmentDetail.lepesek.get(telSel);}
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -254,10 +263,8 @@ String TAG = "ááááááá";
         andr = (ImageView) view.findViewById(R.id.android_eats_apple_image);
 
         BottomNavigationViewHelper.disableShiftMode(mNavi);
+        Log.e("FragmentStep","telSel"+telSel);
 
-
-
-Log.e("OnCreate", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa "+videoString);
         setHasOptionsMenu(true);
 
         if(savedInstanceState != null) {
@@ -281,6 +288,7 @@ Log.e("OnCreate", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa "+videoString);
                 lepes.setText(step.getDescription());
 
             }
+            else{lepes.setText(step.getDescription());}
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

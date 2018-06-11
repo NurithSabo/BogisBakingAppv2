@@ -45,31 +45,11 @@ public class DataRecipe implements Serializable{
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<DataIngredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public ArrayList<DataStep> getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<DataStep> steps) {
-        this.steps = steps;
-    }
-
-    public int getServings() {
-        return servings;
-    }
-
-    public void setServings(int servings) {
-        this.servings = servings;
-    }
-
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

@@ -19,12 +19,12 @@ import java.util.ArrayList;
  * Created by Bogi on 2018. 05. 06..
  */
 
-public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItemClickListener{
+public class FragmentDetail extends Fragment implements AdapterShowSteps.OnItemClickListener{
 
     ArrayList<DataIngredient> hozzavalok = ActivityMain.ingredList;;
     TextView ingList;
     public static ArrayList<DataStep> lepesek;
-    private Adapter2ShowSteps mAdapterShowSteps;
+    private AdapterShowSteps mAdapterShowSteps;
     private Context mContext;
     RecyclerView mRecyclerview;
     public String STEP = "step";
@@ -75,7 +75,7 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
         mRecyclerview = view.findViewById(R.id.recipe_details_steps);
         mRecyclerview.setHasFixedSize(true);
         RecyclerView.LayoutManager manager;
-        mAdapterShowSteps = new Adapter2ShowSteps(mContext,lepesek);
+        mAdapterShowSteps = new AdapterShowSteps(mContext,lepesek);
         mRecyclerview.setAdapter(mAdapterShowSteps);
         mAdapterShowSteps.setOnItemClickListener(this);
         manager = new LinearLayoutManager(mContext);
@@ -114,6 +114,13 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
 
         if(!ActivityMain.tabletSize)
         {
+
+
+            Log.e("FragmentDetail"," tempSelection"+FragmentStep.tempSelection);
+            Log.e("FragmentDetail"," position"+position);
+            FragmentStep.telSel= position;
+            Log.e("FragmentDetail"," telSel"+FragmentStep.telSel);
+            //fs.setVideoString(clickedLepes.getVideoUrl());
             startActivity(intent);
         }
 
@@ -132,6 +139,7 @@ public class FragmentDetail extends Fragment implements Adapter2ShowSteps.OnItem
                 .replace(R.id.content_frame_recipe_steps,fragmentStep)
                 .commit();
         FragmentStep.tempSelection = position;
+
 
        //FragmentStep.lepes.setText(clickedLepes.getDescription());
 

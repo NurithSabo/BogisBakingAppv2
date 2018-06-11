@@ -13,7 +13,7 @@
         android:id="@+id/recipe_step_desc_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/material_card_edge_margin"
+        android:layout_margin="@dimen/ingred_card_edge_margin"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
@@ -40,17 +40,18 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/background"
-                android:src="@drawable/android_eating_apple" />
+                android:src="@drawable/android_eating_apple"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/recipe_step"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/material_card_title_block_large_padding_bottom"
-                android:paddingEnd="@dimen/material_card_title_block_padding_horizontal"
-                android:paddingStart="@dimen/material_card_title_block_padding_horizontal"
-                android:paddingTop="@dimen/material_card_title_block_large_padding_top"
-                android:textSize="@dimen/material_card_supporting_text_text_size"
+                android:paddingBottom="@dimen/ingred_card_title_block_large_padding_bottom"
+                android:paddingEnd="@dimen/ingred_card_title_block_padding_horizontal"
+                android:paddingStart="@dimen/ingred_card_title_block_padding_horizontal"
+                android:paddingTop="@dimen/ingred_card_title_block_large_padding_top"
+                android:textSize="@dimen/ingred_card_supporting_text_text_size"
                 tools:text="Step description" />
         </LinearLayout>
 

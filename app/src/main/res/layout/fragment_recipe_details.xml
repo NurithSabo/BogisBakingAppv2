@@ -24,12 +24,12 @@
             android:id="@+id/recipe_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/material_card_title_block_large_padding_bottom"
-            android:paddingEnd="@dimen/material_card_title_block_padding_horizontal"
-            android:paddingStart="@dimen/material_card_title_block_padding_horizontal"
+            android:paddingBottom="@dimen/ingred_card_title_block_large_padding_bottom"
+            android:paddingEnd="@dimen/ingred_card_title_block_padding_horizontal"
+            android:paddingStart="@dimen/ingred_card_title_block_padding_horizontal"
             android:paddingTop="@dimen/ingred_card_padding_top"
             android:text="egy,\nkettő, \nhárom"
-            android:textSize="@dimen/material_card_supporting_text_text_size" />
+            android:textSize="@dimen/ingred_card_supporting_text_text_size" />
 
     </android.support.v7.widget.CardView>
 
@@ -37,7 +37,7 @@
         android:id="@+id/recipe_details_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/material_card_edge_margin"
+        android:layout_margin="@dimen/ingred_card_edge_margin"
         android:background="@color/background" />
 
 </LinearLayout>

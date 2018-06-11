@@ -1,14 +1,20 @@
 package com.example.android.bogisbakingappv2;
 
+import android.app.Application;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import android.content.SharedPreferences;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -20,7 +26,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  * Created by Bogi on 2018. 05. 05..
  */
 
-public class Adapter1ShowMainScreen extends RecyclerView.Adapter<Adapter1ShowMainScreen.ImageViewHolder>
+public class AdapterShowMainScreen extends RecyclerView.Adapter<AdapterShowMainScreen.ImageViewHolder>
 {
     private final Context mContext;
     private OnItemClickListener mListener;
@@ -34,11 +40,10 @@ public class Adapter1ShowMainScreen extends RecyclerView.Adapter<Adapter1ShowMai
     }
 
     @Override
-    public void onBindViewHolder(ImageViewHolder holder, int position) {
-        DataRecipe currentRecipe = mRecipes.get(position);
+    public void onBindViewHolder(ImageViewHolder holder, final int position) {
+        final DataRecipe currentRecipe = mRecipes.get(position);
         String imageUrl = currentRecipe.getImageUrl();
         String cakeName = currentRecipe.getName();
-
 
         final int radius = 10;
         final int margin = 10;
@@ -60,7 +65,46 @@ public class Adapter1ShowMainScreen extends RecyclerView.Adapter<Adapter1ShowMai
                     .transform(transformation)
                     .into(holder.mImageView);
         }
+
+
+        ImageButton mImageButton =(ImageButton) holder.imageButton;
+        if(mImageButton!=null) {
+            mImageButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                   Toast.makeText(mContext, currentRecipe.getName()+" is added to your widget", Toast.LENGTH_LONG).show();
+
+                    //widget:
+                    ArrayList<DataIngredient> ingredientsWidget = currentRecipe.getIngredients();
+                    StringBuilder builder = new StringBuilder();
+                    for (int i=0; i< ingredientsWidget.size(); i++)
+                    {
+                        builder.append(
+                                ingredientsWidget.get(i).quantity +" "+
+                                        ingredientsWidget.get(i).measure +" of "+
+                                        ingredientsWidget.get(i).ingredientName + "\n");
+                    }
+
+                    SharedPreferences preferences = mContext.getSharedPreferences("Recipe", 0);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("ingredientsWidget", builder.toString());
+
+                    editor.putString("title",currentRecipe.getName());
+                    editor.apply();
+
+                    int[] ids = AppWidgetManager.getInstance(((ActivityMain)mContext).getApplication()).getAppWidgetIds
+                            (new ComponentName(((ActivityMain)mContext).getApplication(), WidgetCake.class));
+                    WidgetCake myWidget = new WidgetCake();
+                    myWidget.onUpdate(((ActivityMain)mContext).getBaseContext(), AppWidgetManager.getInstance(((ActivityMain)mContext).getBaseContext()),ids);
+                }
+
+            });
+        }
     }
+
+
+
 
     @Override
     public int getItemCount()
@@ -77,24 +121,23 @@ public class Adapter1ShowMainScreen extends RecyclerView.Adapter<Adapter1ShowMai
         mListener = listener;
     }
 
-    public Adapter1ShowMainScreen(Context context, ArrayList<DataRecipe> mListOfImages) {
+    public AdapterShowMainScreen(Context context, ArrayList<DataRecipe> mListOfImages) {
         mContext = context;
         mRecipes = mListOfImages;
     }
 
-    public Adapter1ShowMainScreen(Context mContext) {
-        this.mContext = mContext;
-    }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
 
         public final ImageView mImageView;
         public final TextView mTextView;
+        public ImageButton imageButton;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.image);
             mTextView = itemView.findViewById(R.id.recipe_name);
+            imageButton = itemView.findViewById(R.id.heart_button);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

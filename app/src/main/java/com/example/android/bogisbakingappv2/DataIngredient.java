@@ -21,23 +21,11 @@ public class DataIngredient implements Serializable {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
     public String getMeasure() {
         return measure;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
-
     public String getIngredientName() {
         return ingredientName;
-    }
-
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
     }
 }

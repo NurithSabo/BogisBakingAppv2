@@ -1,7 +1,10 @@
 package com.example.android.bogisbakingappv2;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -28,20 +30,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainScreen.OnItemClickListener{
+public class ActivityMain extends AppCompatActivity implements AdapterShowMainScreen.OnItemClickListener{
 
-    public static final String ID = "0";
     public static final String NAME = "name";
     public static final String INGREDIENTS = "ing";
     public static final String STEPS = "steps";
-    public static final ArrayList<DataStep> STEP = new ArrayList<>();
-    public static final String SERVINGS = "1";
-    public static final String IMAGE_URL = "imageUrl";
 
     public static boolean tabletSize;
 
     private RecyclerView mRecyclerview;
-    private Adapter1ShowMainScreen mAdapter1ShowMainScreen;
+    private AdapterShowMainScreen mAdapterShowMainScreen;
     private ArrayList<DataRecipe> mRecipeList;
     private RequestQueue mRequestQueue;
 
@@ -51,12 +49,10 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
     public static ArrayList<DataStep> stepList;
 
 
-
     private void loadImageData(){
         mRecipeList = new ArrayList<>();
         mRequestQueue = Volley.newRequestQueue(this);
         parseJsonForImage();
-
     }
 
     public void parseJsonForImage(){
@@ -77,7 +73,8 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
                                 String name = eredmeny.getString("name");
 
                                 JSONArray jsonArrayIngredients = eredmeny.getJSONArray("ingredients");
-                                ArrayList<DataIngredient> ingredients = new ArrayList<>();
+
+                                ArrayList<DataIngredient>ingredients = new ArrayList<>();
 
                                 for (int j = 0; j < jsonArrayIngredients.length(); j++)
                                 {
@@ -87,7 +84,6 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
                                     String hozzavalo = ingredient.getString("ingredient");
 
                                     ingredients.add(new DataIngredient(Double.parseDouble(mennyiseg), meret, hozzavalo));
-  // Log.e("ing",""+ingredients.get(j).getIngredientName());
                                 }
 
                                 JSONArray jsonArraySteps = eredmeny.getJSONArray("steps");
@@ -113,9 +109,9 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
                                         (id, name, ingredients, steps, Integer.parseInt(servings), image));
 
                             }
-                            mAdapter1ShowMainScreen = new Adapter1ShowMainScreen(ActivityMain.this, mRecipeList);
-                            mRecyclerview.setAdapter(mAdapter1ShowMainScreen);
-                            mAdapter1ShowMainScreen.setOnItemClickListener(ActivityMain.this);
+                            mAdapterShowMainScreen = new AdapterShowMainScreen(ActivityMain.this, mRecipeList);
+                            mRecyclerview.setAdapter(mAdapterShowMainScreen);
+                            mAdapterShowMainScreen.setOnItemClickListener(ActivityMain.this);
                         }
                         catch (JSONException e)
                         {
@@ -125,13 +121,9 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("VolleyHiba",error.getMessage());
-
-                {Log.e("kkk", "Nincs hálóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóóó");}
-                //error.printStackTrace();
+                error.printStackTrace();
             }
         });
-
         mRequestQueue.add(request);
     }
 
@@ -153,19 +145,19 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
         progBar = findViewById(R.id.progressBar);
         tabletSize = getResources().getBoolean(R.bool.isTablet);
 
-        String answer = "";
+        String info = "";
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (null != activeNetwork) {
-            answer = "You are connected to internet";
+        if (null != activeNetwork)
+        {
+            info = "You are connected to internet";
         }
         else{
 
-            answer = "No internet Connection";}
+            info = "No internet Connection";}
 
-        Toast.makeText(ActivityMain.this, answer,
+        Toast.makeText(ActivityMain.this, info,
                 Toast.LENGTH_LONG).show();
-        Log.e("llll",answer+"");
 
         if (tabletSize)
         {
@@ -176,17 +168,42 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
         else
         {
             progBar.setVisibility(View.INVISIBLE);
-
             manager = new LinearLayoutManager(this);
         }
         loadImageData();
         mRecyclerview.setLayoutManager(manager);
-
     }
 
+    public void loadWidget(int position )
+    {
+       //widget:
+        ArrayList<DataIngredient> widgetIngredientsList = mRecipeList.get(position).getIngredients();
+        StringBuilder builder = new StringBuilder();
+        for (int i=0; i< widgetIngredientsList.size(); i++)
+        {
+            builder.append(
+                    widgetIngredientsList.get(i).quantity +" "+
+                    widgetIngredientsList.get(i).measure +" of "+
+                    widgetIngredientsList.get(i).ingredientName + "\n");
+        }
+
+        SharedPreferences preferences = getSharedPreferences("Recipe", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("widgetIngredientsList", builder.toString());
+
+        editor.putString("title", mRecipeList.get(position).getName());
+        editor.apply();
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds
+                (new ComponentName(getApplication(), WidgetCake.class));
+        WidgetCake myWidget = new WidgetCake();
+        myWidget.onUpdate(getBaseContext(), AppWidgetManager.getInstance(getBaseContext()),ids);
+        //-widget
+    }
 
     @Override
     public void onItemClick(int position) {
+
+        //loadWidget(position);
 
         Intent intent = new Intent(this, ActivityDetail.class);
         DataRecipe clicked = mRecipeList.get(position);
@@ -198,5 +215,11 @@ public class ActivityMain extends AppCompatActivity implements Adapter1ShowMainS
         intent.putExtra(INGREDIENTS, ingredList);
         intent.putExtra(STEPS, stepList);
         startActivity(intent);
+
+
+
+
+
+
     }
 }

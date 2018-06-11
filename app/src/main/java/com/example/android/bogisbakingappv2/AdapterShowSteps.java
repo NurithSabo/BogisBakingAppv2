@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by Bogi on 2018. 05. 06..
  */
 
-public class Adapter2ShowSteps extends RecyclerView.Adapter<Adapter2ShowSteps.RecipeSteps> {
+public class AdapterShowSteps extends RecyclerView.Adapter<AdapterShowSteps.RecipeSteps> {
 
     private final Context mContext;
     private OnItemClickListener mListener;
@@ -59,7 +59,7 @@ public class Adapter2ShowSteps extends RecyclerView.Adapter<Adapter2ShowSteps.Re
         mListener = listener;
     }
 
-    public Adapter2ShowSteps(Context mContext, ArrayList<DataStep> mSteps) {
+    public AdapterShowSteps(Context mContext, ArrayList<DataStep> mSteps) {
         this.mContext = mContext;
         this.mSteps = mSteps;
     }
