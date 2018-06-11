@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Bogi\'s Baking App v2</string>
-    <string name="reload">Reload</string>
     <string name="recipe_name">Cakes\'s name</string>
+    <!--widget-->
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="ingredients">Ingredients</string>
 </resources>
