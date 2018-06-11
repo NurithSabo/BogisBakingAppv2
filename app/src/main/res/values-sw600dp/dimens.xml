@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="recipe_ingredients_text_size">22sp</dimen>
+    <dimen name="recipe_ingredients_text_size">27sp</dimen>
     <dimen name="exo_high">300dp</dimen>
+
 </resources>

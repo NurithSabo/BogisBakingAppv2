@@ -14,10 +14,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/ingred_card_edge_margin"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:elevation="@dimen/material_card_elevation_resting"
+        android:layout_marginLeft="@dimen/ingred_card_title_block_large_padding"
+        android:layout_marginRight="@dimen/ingred_card_title_block_large_padding"
+        android:layout_marginTop="@dimen/ingred_card_title_block_large_padding"
+        android:elevation="@dimen/ingred_card_elevation_resting"
         app:cardBackgroundColor="@color/background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,12 +36,12 @@
                 android:id="@+id/android_eats_apple_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/ingred_card_title_block_large_padding"
+                android:layout_marginRight="@dimen/ingred_card_title_block_large_padding"
+                android:layout_marginTop="@dimen/ingred_card_title_block_large_padding"
                 android:background="@color/background"
                 android:src="@drawable/android_eating_apple"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/content_desc" />
 
             <TextView
                 android:id="@+id/recipe_step"
@@ -50,7 +50,7 @@
                 android:paddingBottom="@dimen/ingred_card_title_block_large_padding_bottom"
                 android:paddingEnd="@dimen/ingred_card_title_block_padding_horizontal"
                 android:paddingStart="@dimen/ingred_card_title_block_padding_horizontal"
-                android:paddingTop="@dimen/ingred_card_title_block_large_padding_top"
+                android:paddingTop="@dimen/ingred_card_title_block_large_padding"
                 android:textSize="@dimen/ingred_card_supporting_text_text_size"
                 tools:text="Step description" />
         </LinearLayout>
@@ -61,9 +61,9 @@
         android:id="@+id/recipe_step_video"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_high"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/ingred_card_title_block_large_padding"
+        android:layout_marginRight="@dimen/ingred_card_title_block_large_padding"
+        android:layout_marginTop="@dimen/ingred_card_title_block_large_padding"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

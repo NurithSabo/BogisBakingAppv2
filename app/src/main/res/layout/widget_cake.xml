@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/ingred_card_edge_margin"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/ingredients"
         android:text="@string/ingredients"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/recipe_ingredients_text_size"
         android:elevation="@dimen/card_elevation"
         android:textStyle="bold|italic" />
 
@@ -28,7 +28,8 @@
         android:id="@+id/appwidget_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/background"/>
+        android:layout_margin="@dimen/ingred_card_edge_margin"
+        android:background="@color/cardBackground"
+        android:textSize="@dimen/recipe_ingredients_text_size"/>
 
 </LinearLayout>

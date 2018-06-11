@@ -1,15 +1,11 @@
 package com.example.android.bogisbakingappv2;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -20,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,13 +33,9 @@ import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 /**
  * Created by Bogi on 2018. 05. 07..
@@ -70,22 +61,8 @@ String TAG = "ááááááá";
     BottomNavigationView mNavi;
     public static int tempSelection;
     public static int telSel;
-
-    public void setTelSel(int telSel) {
-        this.telSel = telSel;
-    }
-
     String video;
     int orientation;
-
-    ConstraintLayout.LayoutParams params;
-    public boolean videoAvailableFlag;
-    private static final String SELECTION_MADE_ON_STATE = "SelectOn";
-    private static final String VIDEO_AVAIL = "videoAvailablility";
-    private static final String PLAY_STATE_RESTORE="playstate";
-    public static final String PLAYBACK_POSITION = "playback_position";
-    public static long playbackPosition=0;
-    public static boolean shouldAutoPlay=true;
 
     public FragmentStep() {}
 
