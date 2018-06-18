@@ -32,9 +32,9 @@ import java.util.ArrayList;
 
 public class ActivityMain extends AppCompatActivity implements AdapterShowMainScreen.OnItemClickListener{
 
-    public static final String NAME = "name";
-    public static final String INGREDIENTS = "ing";
-    public static final String STEPS = "steps";
+    static final String NAME = "name";
+    private static final String INGREDIENTS = "ing";
+    private static final String STEPS = "steps";
 
     public static boolean tabletSize;
 
@@ -55,7 +55,7 @@ public class ActivityMain extends AppCompatActivity implements AdapterShowMainSc
         parseJsonForImage();
     }
 
-    public void parseJsonForImage(){
+    private void parseJsonForImage(){
         String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -138,7 +138,7 @@ public class ActivityMain extends AppCompatActivity implements AdapterShowMainSc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerview = (RecyclerView) findViewById(R.id.recipesList);
+        mRecyclerview = findViewById(R.id.recipesList);
         mRecyclerview.setHasFixedSize(true);
         RecyclerView.LayoutManager manager;
 
@@ -147,7 +147,10 @@ public class ActivityMain extends AppCompatActivity implements AdapterShowMainSc
 
         String info = "";
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        NetworkInfo activeNetwork = null;
+        if (cm != null) {
+            activeNetwork = cm.getActiveNetworkInfo();
+        }
         if (null != activeNetwork)
         {
             info = "You are connected to internet";

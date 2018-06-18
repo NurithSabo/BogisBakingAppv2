@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Bogi on 2018. 05. 05..
  */
 
-public class DataIngredient implements Serializable {
+class DataIngredient implements Serializable {
     public double quantity;
     public String measure;
     public String ingredientName;

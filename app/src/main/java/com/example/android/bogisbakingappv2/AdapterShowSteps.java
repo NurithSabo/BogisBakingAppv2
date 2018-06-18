@@ -1,6 +1,7 @@
 package com.example.android.bogisbakingappv2;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +22,17 @@ public class AdapterShowSteps extends RecyclerView.Adapter<AdapterShowSteps.Reci
     private ArrayList<DataStep> mSteps = new ArrayList<>();
 
 
+    @NonNull
     @Override
-    public RecipeSteps onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecipeSteps onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.recy_steps,parent,false);
         return new RecipeSteps(v);
     }
 
 
     @Override
-    public void onBindViewHolder(RecipeSteps holder, int position) {
-        DataStep currentStep = null;
+    public void onBindViewHolder(@NonNull RecipeSteps holder, int position) {
+        DataStep currentStep;
         try {
             currentStep = mSteps.get(position);
             String shortStep = currentStep.getShortDescription();

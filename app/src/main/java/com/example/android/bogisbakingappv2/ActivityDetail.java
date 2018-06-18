@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 
 public class ActivityDetail extends ActivityMain {
 
-    public String name;
-    LinearLayout lay;
+    private String name;
+    private LinearLayout lay;
     public DataStep lepes;
 
 
@@ -47,19 +47,18 @@ public class ActivityDetail extends ActivityMain {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         boolean isTablet = ActivityMain.tabletSize;//getResources().getBoolean(R.bool.isTablet);
-        lay = (LinearLayout) findViewById(R.id.reszletes_lepes_layout);
+        lay = findViewById(R.id.reszletes_lepes_layout);
 
         if (getSupportActionBar() != null && getIntent().getExtras() != null) {
             name = getIntent().getExtras().getString(ActivityMain.NAME);
             setTitle(name);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        else{System.out.println("böeeeeeeeeee");}
 
        //https://stackoverflow.com/questions/31277979/why-is-it-necessary-to-check-savedinstancestate-inside-of-oncreate
          if(savedInstanceState == null)
             {
-                if( isTablet == false)
+                if(!isTablet)
                     {
                         detailLoad();
                     }

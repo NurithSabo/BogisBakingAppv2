@@ -3,6 +3,7 @@ package com.example.android.bogisbakingappv2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class FragmentDetail extends Fragment implements AdapterShowSteps.OnItemClickListener{
 
-    ArrayList<DataIngredient> hozzavalok = ActivityMain.ingredList;;
+    ArrayList<DataIngredient> hozzavalok = ActivityMain.ingredList;
     TextView ingList;
     public static ArrayList<DataStep> lepesek;
     private AdapterShowSteps mAdapterShowSteps;
@@ -60,17 +61,20 @@ public class FragmentDetail extends Fragment implements AdapterShowSteps.OnItemC
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
-        ingList = (TextView) view.findViewById(R.id.recipe_ingredients);
+        ingList = view.findViewById(R.id.recipe_ingredients);
 
             ingredients(hozzavalok,ingList);
            // Log.e("hozzavalok:", ""+hozzavalok.get(0).getIngredientName());
 
 
         lepesek = ActivityMain.stepList;
-        mContext = getActivity().getApplicationContext();
+        try {
+            mContext = getActivity().getApplicationContext();
+        } catch (NullPointerException e){ e.printStackTrace();
+        }
 
         mRecyclerview = view.findViewById(R.id.recipe_details_steps);
         mRecyclerview.setHasFixedSize(true);
@@ -83,8 +87,8 @@ public class FragmentDetail extends Fragment implements AdapterShowSteps.OnItemC
 
 
         try {
-            if(lepesek.get(FragmentStep.tempSelection).getVideoUrl()!=null
-                    || lepesek.get(FragmentStep.tempSelection).getVideoUrl()!="")
+            if(lepesek.get(FragmentStep.tempSelection).getVideoUrl()!=(null)
+                    || !lepesek.get(FragmentStep.tempSelection).getVideoUrl().equals(""))
             {
             fs.setVideoString(lepesek.get(FragmentStep.tempSelection).getVideoUrl());
             }
@@ -130,15 +134,17 @@ public class FragmentDetail extends Fragment implements AdapterShowSteps.OnItemC
         {
             video = clickedLepes.getVideoUrl();
 
-            if(clickedLepes.getVideoUrl()!=null || clickedLepes.getVideoUrl()!=""){
+            if(clickedLepes.getVideoUrl()!=null || !clickedLepes.getVideoUrl().equals("")){
                 fs.setVideoString(clickedLepes.getVideoUrl());
 
                  FragmentStep fragmentStep = new FragmentStep();
                  FragmentManager manager = getFragmentManager();
-                 manager.beginTransaction()
-                .replace(R.id.content_frame_recipe_steps,fragmentStep)
-                .commit();
-        FragmentStep.tempSelection = position;
+                if (manager != null) {
+                    manager.beginTransaction()
+                   .replace(R.id.content_frame_recipe_steps,fragmentStep)
+                   .commit();
+                }
+                FragmentStep.tempSelection = position;
 
 
        //FragmentStep.lepes.setText(clickedLepes.getDescription());

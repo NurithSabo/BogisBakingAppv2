@@ -3,6 +3,7 @@ package com.example.android.bogisbakingappv2;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +31,15 @@ public class AdapterShowMainScreen extends RecyclerView.Adapter<AdapterShowMainS
     private ArrayList<DataRecipe> mRecipes = new ArrayList<>();
 
 
+    @NonNull
     @Override
-    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.recy_recipes,parent,false);
         return new ImageViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ImageViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, final int position) {
         final DataRecipe currentRecipe = mRecipes.get(position);
         String imageUrl = currentRecipe.getImageUrl();
         String cakeName = currentRecipe.getName();
@@ -64,7 +66,7 @@ public class AdapterShowMainScreen extends RecyclerView.Adapter<AdapterShowMainS
         }
 
 
-        ImageButton mImageButton =(ImageButton) holder.imageButton;
+        ImageButton mImageButton = holder.imageButton;
         if(mImageButton!=null) {
             mImageButton.setOnClickListener(new View.OnClickListener() {
 

@@ -20,7 +20,7 @@ public class ActivityStep extends AppCompatActivity{
         return true;
     }
 
-    public void loadStep()
+    private void loadStep()
     {
         manager2.beginTransaction()
                 .add(R.id.content_frame_recipe_steps,fragmentStep)
