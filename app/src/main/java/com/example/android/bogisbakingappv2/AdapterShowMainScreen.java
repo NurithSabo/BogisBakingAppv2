@@ -85,7 +85,7 @@ public class AdapterShowMainScreen extends RecyclerView.Adapter<AdapterShowMainS
                     SharedPreferences preferences = mContext.getSharedPreferences("Recipe", 0);
                     SharedPreferences.Editor editor = preferences.edit();
 
-                    editor.putString("ingredientsListInWidget", builder.toString());
+                    editor.putString("ingredientsWidget", builder.toString());
                     editor.putString("title", currentRecipe.getName());
                     editor.apply();
 
