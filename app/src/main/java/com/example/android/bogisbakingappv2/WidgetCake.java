@@ -18,6 +18,7 @@ public class WidgetCake extends AppWidgetProvider {
 
         if (preferences.contains("title")) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_cake);
+
             views.setTextViewText(R.id.appwidget_text, preferences.getString("title", null));
             views.setTextViewText(R.id.appwidget_list, preferences.getString("ingredientsWidget", null));
             appWidgetManager.updateAppWidget(appWidgetId, views);

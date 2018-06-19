@@ -177,36 +177,9 @@ public class ActivityMain extends AppCompatActivity implements AdapterShowMainSc
         mRecyclerview.setLayoutManager(manager);
     }
 
-    public void loadWidget(int position )
-    {
-       //widget:
-        ArrayList<DataIngredient> widgetIngredientsList = mRecipeList.get(position).getIngredients();
-        StringBuilder builder = new StringBuilder();
-        for (int i=0; i< widgetIngredientsList.size(); i++)
-        {
-            builder.append(
-                    widgetIngredientsList.get(i).quantity +" "+
-                    widgetIngredientsList.get(i).measure +" of "+
-                    widgetIngredientsList.get(i).ingredientName + "\n");
-        }
-
-        SharedPreferences preferences = getSharedPreferences("Recipe", 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("widgetIngredientsList", builder.toString());
-
-        editor.putString("title", mRecipeList.get(position).getName());
-        editor.apply();
-        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds
-                (new ComponentName(getApplication(), WidgetCake.class));
-        WidgetCake myWidget = new WidgetCake();
-        myWidget.onUpdate(getBaseContext(), AppWidgetManager.getInstance(getBaseContext()),ids);
-        //-widget
-    }
 
     @Override
     public void onItemClick(int position) {
-
-        //loadWidget(position);
 
         Intent intent = new Intent(this, ActivityDetail.class);
         DataRecipe clicked = mRecipeList.get(position);
